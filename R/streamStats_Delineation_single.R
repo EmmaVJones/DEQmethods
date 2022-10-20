@@ -32,7 +32,7 @@ streamStats_Delineation_single <- function(state,
                    '&crs=4326&includeparameters=false&includeflowtypes=false&includefeatures=true&simplify=true')
   # data pulled
   mydata <-  tryCatch({
-    fromJSON(query, simplifyVector = FALSE, simplifyDataFrame = FALSE)},
+    jsonlite::fromJSON(query, simplifyVector = FALSE, simplifyDataFrame = FALSE)},
     error = function(cond){
       message(paste('StreamStats Error:', cond))
       return(NULL)},
@@ -43,19 +43,19 @@ streamStats_Delineation_single <- function(state,
   # catch if server bomb out for any reason
   if(!is.null(mydata)){
     # organize watershed
-    poly_geojsonsting <- toJSON(mydata$featurecollection[[2]]$feature, auto_unbox = TRUE)
-    outData$polygon <- geojson_sf(poly_geojsonsting) %>%
-      mutate(UID = UID) %>%
+    poly_geojsonsting <- jsonlite::toJSON(mydata$featurecollection[[2]]$feature, auto_unbox = TRUE)
+    outData$polygon <- geojsonio::geojson_sf(poly_geojsonsting) %>%
+      dplyr::mutate(UID = UID) %>%
       dplyr::select(UID)
 
     # organize point
-    point_geojsonsting <- toJSON(mydata$featurecollection[[1]]$feature, auto_unbox = TRUE)
+    point_geojsonsting <- jsonlite::toJSON(mydata$featurecollection[[1]]$feature, auto_unbox = TRUE)
     outData$point <- geojson_sf(point_geojsonsting) %>%
-      mutate(UID = UID)%>%
+      dplyr::mutate(UID = UID)%>%
       dplyr::select(UID)
   } else {
-    outData$polygon <- st_sf(UID = NA, geometry=  st_sfc(st_polygon()), crs = 4326)#data.frame(UID = NA, geometry= NA)
-    outData$point <- st_sf(UID = NA, geometry=  st_sfc(st_point()), crs = 4326)#data.frame(UID = NA, geometry= NA)
+    outData$polygon <- sf::st_sf(UID = NA, geometry =  sf::st_sfc(st_polygon()), crs = 4326)#data.frame(UID = NA, geometry= NA)
+    outData$point <- sf::st_sf(UID = NA, geometry =  sf::st_sfc(st_point()), crs = 4326)#data.frame(UID = NA, geometry= NA)
   }
 
   return(outData)

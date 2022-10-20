@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Emma Jones
 Maintainer: <emma.jones@deq.virginia.gov>
 Description: A central place to define common methods utilized by DEQ staff to complete daily analytical routines and codify standardized data governance. 
-Imports: magrittr, sf, jsonlite, geojsonio
+Imports: magrittr, dplyr, sf, jsonlite, geojsonio
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
