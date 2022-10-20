@@ -1,11 +1,11 @@
-Package: TestPackage
+Package: DEQmethods
 Type: Package
-Title: What the Package Does (Title Case)
+Title: This package contains common methods utilized by DEQ staff.
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Emma Jones
+Maintainer: <emma.jones@deq.virginia.gov>
+Description: A central place to define common methods utilized by DEQ staff to complete daily analytical routines and codify standardized data governance. 
+Imports: magrittr, sf, jsonlite, geojsonio
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
