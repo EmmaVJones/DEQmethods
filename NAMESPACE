@@ -3,3 +3,4 @@
 export(hello)
 export(streamStats_Delineation)
 export(streamStats_Delineation_single)
+importFrom(magrittr,"%>%")

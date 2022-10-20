@@ -50,7 +50,7 @@ streamStats_Delineation_single <- function(state,
 
     # organize point
     point_geojsonsting <- jsonlite::toJSON(mydata$featurecollection[[1]]$feature, auto_unbox = TRUE)
-    outData$point <- geojson_sf(point_geojsonsting) %>%
+    outData$point <- geojsonio::geojson_sf(point_geojsonsting) %>%
       dplyr::mutate(UID = UID)%>%
       dplyr::select(UID)
   } else {
